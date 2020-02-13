@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+    请输入账号:<input type="text" v-model:name="account">
+    <br>
+    请输入密码:<input type="text" v-model:name="password">
+        <br>
+        <button @click="login()">登录</button>
+    </div>
+</body>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                account:"",
+                password:"",
+                zz:[]
+            },
+            methods:{
+                login:function () {
+                    var params = new URLSearchParams();
+                    params.append("account",this.account);
+                    params.append("password",this.password);
+                    axios
+                        .post("login",params)
+                        .then(res=>{
+
+                           this.zz=res.data;
+                            alert(this.zz);
+
+
+                            if (res.data.indexOf('成功')!=-1){
+                              alert(res.data);
+                                location.href="success";
+                            }else {
+                                alert(this.zz);
+                                location.reload();
+                            }
+
+                    })
+                }
+            }
+        })
+
+
+    </script>
+</html>

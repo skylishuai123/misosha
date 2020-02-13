@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+    <table style="border: 1px solid rosybrown;height: 600px;text-align: center">
+        <tr>
+            <td>商品编号</td>
+            <td>商品名字</td>
+            <td>商品价格</td>
+            <td>商品数量</td>
+            <td>描述</td>
+            <td>图片</td>
+            <td>开始抢购</td>
+        </tr>
+        <tr v-for="product in  productinfo">
+            <td>{{product .pid}}</td>
+            <td>{{product .pname}}</td>
+            <td>{{product .price}}</td>
+            <td>{{product .count}}</td>
+            <td>{{product .detial}}</td>
+            <td><img :src="product.img" style="width: 50px;height: 50px"></td>
+            <td><a :href="'mai?pid='+product.pid">买买买</a></td>
+        </tr>
+    </table>
+    </div>
+<script type="text/javascript">
+    const app = new Vue({
+        el:"#app",
+        data:{
+            productinfo:[]
+        },
+        mounted(){
+            axios
+                .get("all")
+                .then(res=>{
+
+                 this.productinfo=res.data;
+                 console.log(this.productinfo);
+
+                })
+        }
+    })
+</script>
+</body>
+</html>

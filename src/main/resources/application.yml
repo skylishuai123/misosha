@@ -1,0 +1,27 @@
+spring:
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    timeout: 3000
+
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ls?serverTimezone=GMT
+    username: root
+    password: 147258
+  mvc:
+    view:
+      suffix: .html
+      prefix: /html/
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+  #mapper-locations: classpath*:/mapper/*.xml
+

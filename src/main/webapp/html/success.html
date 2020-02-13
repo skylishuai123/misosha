@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <table style="border: 1px solid rosybrown;height: 600px;text-align: center">
+            <tr>
+                <td>商品编号</td>
+                <td>商品名字</td>
+                <td>商品价格</td>
+                <td>商品数量</td>
+                <td>描述</td>
+                <td>图片</td>
+                <td>开始抢购</td>
+            </tr>
+            <tr>
+                <td>{{productinfo.pid}}</td>
+                <td>{{productinfo.pname}}</td>
+                <td>{{productinfo.price}}</td>
+                <td>{{productinfo.count}}</td>
+                <td>{{productinfo.detial}}</td>
+                <td><img :src="productinfo.img" style="width: 50px;height: 50px"></td>
+                <td><input type="button" value="-" @click="f()">
+                    <input type="text"  v-model:name="co">
+                <input type="button" value="+" @click="ff()"></td>
+                <td><input type="button" value="秒杀" @click="df(productinfo.pid)"></td>
+
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        const app = new Vue({
+            el:"#app",
+            data:{
+                productinfo:[],
+                co:"1"
+            },
+            mounted(){
+                axios
+                    .get("ll")
+                    .then(res=>{
+
+                        this.productinfo=res.data;
+                        console.log(this.productinfo);
+
+                    })
+            },
+            methods:{
+                f:function () {
+                    this.co=eval(this.co)-1;
+                },
+                ff:function () {
+                    this.co=eval(this.co)+1;
+                },
+                df:function (obj) {
+                    const pid = obj;
+                    const count=this.co;
+                    const params = new URLSearchParams();
+                    params.append("pid",pid);
+                    params.append("count",count);
+                    axios
+                        .post("miao",params)
+                        .then(res=>{
+                            alert(res.data);
+                            location.reload();
+                        })
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
