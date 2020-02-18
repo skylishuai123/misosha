@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.woniu.miaosha.entity.Product;
 import com.woniu.miaosha.entity.User;
+import com.woniu.miaosha.service.HasRole;
 import com.woniu.miaosha.service.ProductService;
 import com.woniu.miaosha.service.UserService;
 import com.woniu.miaosha.utils.RedisUtil;
@@ -52,11 +53,13 @@ public class ProductController {
         return "login";
     }
     @RequestMapping("/success")
+    @HasRole(value = "laoshuai")
     public String success(){
         return "miaosha";
     }
 
     @RequestMapping("/all")
+
     @ResponseBody
     public List<Product> all(){
 
