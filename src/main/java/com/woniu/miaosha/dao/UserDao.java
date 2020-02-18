@@ -6,5 +6,7 @@ import org.apache.ibatis.annotations.Select;
 public interface UserDao {
     @Select("select * from user where account=#{account} ")
     User findUser(User user);
+    @Select("select * from user where account=#{account} ")
+    User findPremession(String account);
 
 }

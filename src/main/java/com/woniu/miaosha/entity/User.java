@@ -10,7 +10,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int id;
     private String account;
     private String password;
+    private String role;
+    private String premession;
+    private String name;
 }
