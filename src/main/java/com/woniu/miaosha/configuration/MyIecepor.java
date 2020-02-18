@@ -63,11 +63,8 @@ public class MyIecepor extends HandlerInterceptorAdapter {
         if(url.indexOf("static")!=-1){
             return true;
         }
-        if(url.contains("jpg")){
-            System.out.println("lll");
-            return true;
-        }
-        if(url.contains("miaosha")){
+
+        if(url.contains("html")||url.contains("all")){
             if(redisUtil.get(request.getSession().getAttribute("name").toString()).equals("zz")){
                 return true;
             }
@@ -77,16 +74,7 @@ public class MyIecepor extends HandlerInterceptorAdapter {
                 response.setHeader("Location", "show");
             }
         }
-        if(url.contains("all")){
-            if(redisUtil.get(request.getSession().getAttribute("name").toString()).equals("zz")){
-                return true;
-            }
-            else {
-                System.out.println(234);
-                response.setStatus(302);
-                response.setHeader("Location", "show");
-            }
-        }
+
         else {
             System.out.println(234);
             response.setStatus(302);
