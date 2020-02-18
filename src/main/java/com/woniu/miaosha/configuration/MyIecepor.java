@@ -61,6 +61,7 @@ public class MyIecepor extends HandlerInterceptorAdapter {
             return true;
         }
         if(url.indexOf("static")!=-1){
+            System.out.println("喜欢你的小婷婷");
             return true;
         }
 
