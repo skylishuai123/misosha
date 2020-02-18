@@ -64,6 +64,7 @@ public class MyIecepor extends HandlerInterceptorAdapter {
             return true;
         }
         if(url.contains("jpg")){
+            System.out.println("lll");
             return true;
         }
         if(url.contains("miaosha")){
